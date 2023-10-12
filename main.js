@@ -79,4 +79,3 @@ let source = {
 	ImageStatic: ImageStatic,
 };
 export {source};
-

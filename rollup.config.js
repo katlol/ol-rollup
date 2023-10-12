@@ -1,6 +1,6 @@
-import cjs from '@rollup/plugin-commonjs';
-import node from '@rollup/plugin-node-resolve';
-import {terser} from 'rollup-plugin-terser';
+import commonjs from '@rollup/plugin-commonjs';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -8,16 +8,16 @@ export default {
   input: 'main.js',
   output: [
     {file: 'ol-custom.js',
-      format: 'umd',
+      format: 'iife',
       name: 'ol',
       exports: "named",
       sourcemap: true,
     }
   ],
   plugins: [
-    node(),
-    cjs(),
-    production && terser()
+    nodeResolve({browser: true}),
+    commonjs(),
+    terser()
   ],
   onwarn: function(warning, superOnWarn) {
     /*
